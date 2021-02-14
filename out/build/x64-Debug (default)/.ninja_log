@@ -1,0 +1,9 @@
+# ninja log v5
+0	664	635023332	Cpp-Chess-Engine/CMakeFiles/Cpp-Chess-Engine.dir/Cpp-Chess-Engine.cpp.obj	9a61a4f8856d79f4
+664	900	635023332	Cpp-Chess-Engine/Cpp-Chess-Engine.exe	48e50da75b77de83
+3	436	635024138	Cpp-Chess-Engine/CMakeFiles/Cpp-Chess-Engine.dir/Model.cpp.obj	787eb83af1494a37
+0	550	635024138	Cpp-Chess-Engine/CMakeFiles/Cpp-Chess-Engine.dir/Cpp-Chess-Engine.cpp.obj	9a61a4f8856d79f4
+551	698	635024138	Cpp-Chess-Engine/Cpp-Chess-Engine.exe	6eb4de4bf2525abe
+1	158	635024641	Cpp-Chess-Engine/CMakeFiles/Cpp-Chess-Engine.dir/Solver.cpp.obj	2cb2735dffee3ebe
+158	297	635024641	Cpp-Chess-Engine/Cpp-Chess-Engine.exe	2e75c78a701a441
+0	553	635027318	Cpp-Chess-Engine/CMakeFiles/Cpp-Chess-Engine.dir/Cpp-Chess-Engine.cpp.obj	9a61a4f8856d79f4
