@@ -35,6 +35,121 @@ public:
 
 	}
 
+	std::vector<Model> getValidMoves() {
+		std::vector<Model> models;
+		for (std::tuple<std::string, int, int> piece : board) {
+			if (isPiece(piece)) {
+				std::vector<std::tuple<std::string, int, int>> moves = getPieceMoves(piece);
+				// TODO: finish hear!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				std::vector<Model> generatedModels = generateModels(moves);
+				for (Model generatedModel : generatedModels) {
+					models.push_back(generatedModel);
+				}
+			}
+		}
+		return models;
+	}
+
+
+	bool isPiece(std::tuple<std::string, int, int> piece) {
+		if (std::get<0>(piece) != "emp") {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	std::vector<Model> generateModels(std::vector<std::tuple<std::string, int, int>> moves) {
+		std::vector<Model> models;
+		for (std::tuple<std::string, int, int> move : moves) {
+			Model model = Model();
+			model.movePieceToLocation(std::get<0>(move),std::get<1>(move),std::get<2>(move));
+			models.push_back(model);
+		}
+		return models;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getPieceMoves(std::tuple<std::string, int, int> piece) {
+		char pieceType = getPieceType(piece);
+		if (pieceType == 'p') {
+			return getPawnMoves(piece);
+		}
+		else {
+			// TODO: add the rest of the info hear!!!!!
+		}
+	};
+
+	char getPieceType(std::tuple<std::string, int, int> piece) {
+		std::string pieceType = std::get<0>(piece);
+		return pieceType[1];
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getPawnMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> candidateMoves;
+		if (pieceColor == 'w') {
+			if (!hasPiece(row + 1, column)) {
+				candidateMoves.push_back({pieceColorAndType, row + 1, column});
+			}
+			else if (!hasPiece(row + 2, column)) {
+				candidateMoves.push_back({pieceColorAndType, row + 2, column});
+			}
+			else if (hasBlackPiece(row + 1, column + 1)) {
+				candidateMoves.push_back({pieceColorAndType, row + 1, column + 1});
+			}
+			else if (hasBlackPiece(row + 1, column - 1)) {
+				candidateMoves.push_back({pieceColorAndType, row + 1, column - 1});
+			}
+		}
+		else if (pieceColor == 'b') {
+			if (!hasPiece(row - 1, column)) {
+				candidateMoves.push_back({pieceColorAndType, row - 1, column});
+			}
+			else if (!hasPiece(row - 2, column)) {
+				candidateMoves.push_back({pieceColorAndType, row - 2, column});
+			}
+			else if (hasWhitePiece(row - 1, column + 1)) {
+				candidateMoves.push_back({pieceColorAndType, row - 1, column + 1});
+			}
+			else if (hasWhitePiece(row - 1, column - 1)) {
+				candidateMoves.push_back({pieceColorAndType, row - 1, column - 1});
+			}
+		}
+		return candidateMoves;
+	}
+
+	bool hasPiece(int row, int column) {
+		for (std::tuple<std::string, int, int> square : board) {
+			if (std::get<0>(square) != "emp" && std::get<1>(square) == row && std::get<2>(square) == column) {
+				return true;
+			}
+		}
+		return false
+	}
+
+	bool hasBlackPiece(int row, int column) {
+		for (std::tuple<std::string, int, int> square : board) {
+			if (std::get<0>(square)[1] == 'w' && std::get<1>(square) == row && std::get<2>(square) == column) {
+				return true;
+			}
+		}
+		return true;
+	}
+
+	bool hasWhitePiece(int row, int column) {
+		for (std::tuple<std::string, int, int> square : board) {
+			if (std::get<0>(square)[1] == 'w' && std::get<1>(square) == row && std::get<2>(square) == column) {
+				return true;
+			}
+		}
+		return true;
+	}
+
 	void movePieceToLocation(std::string piece, int row, int column) {
 		std::pair<int, int> currentLocation = getLocationOfPiece(piece);
 		setLocationTo("emp", currentLocation.first, currentLocation.second); // remove piece
@@ -60,107 +175,6 @@ public:
 
 	int getPieceValue(std::string piece) {
 		return pieceValues[piece];
-	}
-
-
-	std::vector<Model> getValidMoves() {
-		std::vector<Model> models;
-		for (std::tuple<std::string, int, int> piece : board) {
-			if (isPiece(piece)) {
-				std::vector<std::pair<std::tuple<std::string, int, int>, std::tuple<std::string, int, int>>> moves = getPieceMoves(piece);
-				// TODO: finish hear!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			}
-		}
-	}
-
-	std::vector<std::pair<std::tuple<std::string, int, int>, std::tuple<std::string, int, int>>> getPieceMoves(std::tuple<std::string, int, int> piece) {
-		char pieceType = getPieceType(piece);
-		if (pieceType == 'p') {
-			return getPawnMoves(piece);
-		}
-		else {
-			// TODO: add the rest of the info hear!!!!!
-		}
-	};
-
-	char getPieceType(std::tuple<std::string, int, int> piece) {
-		std::string pieceType = std::get<0>(piece);
-		return pieceType[1];
-	}
-
-	std::vector<std::pair<std::tuple<std::string, int, int>, std::tuple<std::string, int, int>>> getPawnMoves(std::tuple<std::string, int, int> piece) {
-		std::string pieceColorAndType = std::get<0>(piece);
-		char pieceColor = pieceColorAndType[0];
-		char pieceType = pieceColorAndType[1];
-		int row = std::get<1>(piece);
-		int column = std::get<2>(piece);
-		std::vector<std::pair<std::tuple<std::string, int, int>, std::tuple<std::string, int, int>>> candidateMoves;
-		if (pieceColor == 'w') {
-			if (!hasPiece(row + 1, column)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row + 1, column} });
-			}
-			else if (!hasPiece(row + 2, column)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row + 2, column} });
-			}
-			else if (hasBlackPiece(row + 1, column + 1)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row + 1, column + 1} });
-			}
-			else if (hasBlackPiece(row + 1, column - 1)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row + 1, column - 1} });
-			}
-		}
-		else if (pieceColor == 'b') {
-			std::vector<std::pair<std::tuple<std::string, int, int>, std::tuple<std::string, int, int>>> candidateMoves;
-			if (!hasPiece(row - 1, column)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row - 1, column} });
-			}
-			else if (!hasPiece(row - 2, column)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row - 2, column} });
-			}
-			else if (hasWhitePiece(row - 1, column + 1)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row - 1, column + 1} });
-			}
-			else if (hasWhitePiece(row - 1, column - 1)) {
-				candidateMoves.push_back({ {pieceColorAndType, row, column}, {pieceColorAndType, row - 1, column - 1} });
-			}
-		}
-		return candidateMoves;
-	}
-
-	bool hasPiece(int row, int column) {
-		for (std::tuple<std::string, int, int> square : board) {
-			if (std::get<0>(square) != "emp" && std::get<1>(square) == row && std::get<2>(square) == column) {
-				return true;
-			}
-		}
-		return true;
-	}
-
-	bool hasBlackPiece(int row, int column) {
-		for (std::tuple<std::string, int, int> square : board) {
-			if (std::get<0>(square)[1] == 'w' && std::get<1>(square) == row && std::get<2>(square) == column) {
-				return true;
-			}
-		}
-		return true;
-	}
-
-	bool hasWhitePiece(int row, int column) {
-		for (std::tuple<std::string, int, int> square : board) {
-			if (std::get<0>(square)[1] == 'w' && std::get<1>(square) == row && std::get<2>(square) == column) {
-				return true;
-			}
-		}
-		return true;
-	}
-
-	bool isPiece(std::tuple<std::string, int, int> piece) {
-		if (std::get<0>(piece) != "emp") {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	//TODO: Might not need
