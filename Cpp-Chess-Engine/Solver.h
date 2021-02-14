@@ -14,10 +14,10 @@ class Solver {
 
 	private:
 
-		virtual private Model dfsAlphaBeta(Model, int, int);
+		virtual Model dfsAlphaBeta(Model, int, int);
 
-		private int evaluate(Model model);
+		virtual int evaluate(Model model);
 
-		private std::vector<Model> findValideMoves(Model model);
+		vitural std::vector<Model> findValideMoves(Model model);
 
 };
