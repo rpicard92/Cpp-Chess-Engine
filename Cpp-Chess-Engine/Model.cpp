@@ -78,6 +78,9 @@ public:
 		else if (pieceType == 'r') {
 			return getRookMoves(piece);
 		}
+		else if (pieceType == 'k') {
+			return getKnightMoves(piece);
+		}
 	};
 
 	char getPieceType(std::tuple<std::string, int, int> piece) {
@@ -119,6 +122,76 @@ public:
 			}
 			if (hasWhitePiece(row - 1, column - 1) && isOnBaord(row + 1, column) && isOnBaord(row - 1, column) + 1) {
 				moves.push_back({pieceColorAndType, row - 1, column - 1});
+			}
+		}
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getKnightMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		if (pieceColor == WHITE) {
+			// upper right quadrant
+			if ((!hasPiece(row + 1, column + 2) || hasBlackPiece(row + 1, column + 2)) && isOnBaord(row + 1, column + 2)) {
+				moves.push_back({ pieceColorAndType, row + 1, column + 2});
+			}
+			if ((!hasPiece(row + 2, column + 1) || hasBlackPiece(row + 2, column + 1)) && isOnBaord(row + 2, column + 1)) {
+				moves.push_back({ pieceColorAndType, row + 2, column + 1 });
+			}
+			// upper left quadrant
+			if ((!hasPiece(row + 1, column - 2) || hasBlackPiece(row + 1, column - 2)) && isOnBaord(row + 1, column - 2)) {
+				moves.push_back({ pieceColorAndType, row + 1, column - 2 });
+			}
+			if ((!hasPiece(row + 2, column - 1) || hasBlackPiece(row + 2, column - 1)) && isOnBaord(row + 2, column - 1)) {
+				moves.push_back({ pieceColorAndType, row + 2, column - 1 });
+			}
+			// lower left quadrant
+			if ((!hasPiece(row - 1, column - 2) || hasBlackPiece(row - 1, column - 2)) && isOnBaord(row - 1, column - 2)) {
+				moves.push_back({ pieceColorAndType, row - 1, column - 2 });
+			}
+			if ((!hasPiece(row - 2, column - 1) || hasBlackPiece(row - 2, column - 1)) && isOnBaord(row - 2, column - 1)) {
+				moves.push_back({ pieceColorAndType, row - 2, column - 1 });
+			}
+			// lower right quadrant
+			if ((!hasPiece(row - 1, column + 2) || hasBlackPiece(row - 1, column + 2)) && isOnBaord(row - 1, column + 2)) {
+				moves.push_back({ pieceColorAndType, row - 1, column + 2 });
+			}
+			if ((!hasPiece(row - 2, column + 1) || hasBlackPiece(row - 2, column + 1)) && isOnBaord(row - 2, column + 1)) {
+				moves.push_back({ pieceColorAndType, row - 2, column + 1 });
+			}
+		}
+		else if (pieceColor == BLACK) {
+			// upper right quadrant
+			if ((!hasPiece(row + 1, column + 2) || hasWhitePiece(row + 1, column + 2)) && isOnBaord(row + 1, column + 2)) {
+				moves.push_back({ pieceColorAndType, row + 1, column + 2 });
+			}
+			if ((!hasPiece(row + 2, column + 1) || hasWhitePiece(row + 2, column + 1)) && isOnBaord(row + 2, column + 1)) {
+				moves.push_back({ pieceColorAndType, row + 2, column + 1 });
+			}
+			// upper left quadrant
+			if ((!hasPiece(row + 1, column - 2) || hasWhitePiece(row + 1, column - 2)) && isOnBaord(row + 1, column - 2)) {
+				moves.push_back({ pieceColorAndType, row + 1, column - 2 });
+			}
+			if ((!hasPiece(row + 2, column - 1) || hasWhitePiece(row + 2, column - 1)) && isOnBaord(row + 2, column - 1)) {
+				moves.push_back({ pieceColorAndType, row + 2, column - 1 });
+			}
+			// lower left quadrant
+			if ((!hasPiece(row - 1, column - 2) || hasWhitePiece(row - 1, column - 2)) && isOnBaord(row - 1, column - 2)) {
+				moves.push_back({ pieceColorAndType, row - 1, column - 2 });
+			}
+			if ((!hasPiece(row - 2, column - 1) || hasWhitePiece(row - 2, column - 1)) && isOnBaord(row - 2, column - 1)) {
+				moves.push_back({ pieceColorAndType, row - 2, column - 1 });
+			}
+			// lower right quadrant
+			if ((!hasPiece(row - 1, column + 2) || hasWhitePiece(row - 1, column + 2)) && isOnBaord(row - 1, column + 2)) {
+				moves.push_back({ pieceColorAndType, row - 1, column + 2 });
+			}
+			if ((!hasPiece(row - 2, column + 1) || hasWhitePiece(row - 2, column + 1)) && isOnBaord(row - 2, column + 1)) {
+				moves.push_back({ pieceColorAndType, row - 2, column + 1 });
 			}
 		}
 		return moves;
