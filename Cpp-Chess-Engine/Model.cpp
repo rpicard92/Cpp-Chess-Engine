@@ -81,6 +81,9 @@ public:
 		else if (pieceType == 'k') {
 			return getKnightMoves(piece);
 		}
+		else if (pieceType == 'b') {
+			return getBishopMoves(piece);
+		}
 	};
 
 	char getPieceType(std::tuple<std::string, int, int> piece) {
@@ -212,6 +215,157 @@ public:
 		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(leftMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> rightMoves = getRightMoves(piece);
 		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(rightMoves, moves);
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getBishopMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		std::vector<std::tuple<std::string, int, int>> upRightDiagnolMoves = upRightDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upRightDiagnolMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> upLeftDiagnolMoves = upRightDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upLeftDiagnolMoves, moves);
+		//TODO: start here!!
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> upRightDiagnalMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		if (pieceColor == WHITE) {
+			bool loopBroken = false;
+			int iColumn = 1;
+			for (int iRow = row; iRow <= 9; iRow++) {
+				if (iColumn <= 8) {
+					for (std::tuple<std::string, int, int> square : board) {
+						if (std::get<1>(square) == iRow && std::get<2>(square) == column + iColumn) {
+							if (std::get<0>(square)[0] == BLACK) {
+								moves.push_back({ pieceColorAndType, iRow, column + iColumn });
+								loopBroken = true;
+								break;
+							}
+							else if (std::get<0>(square)[0] == WHITE) {
+								loopBroken = true;
+								break;
+							}
+						}
+					}
+				}
+				else {
+					loopBroken = true;
+					break;
+				}
+				iColumn++;
+				if (loopBroken) {
+					break;
+				}
+			}
+		}
+		else if (pieceColor == BLACK) {
+			bool loopBroken = false;
+			int iColumn = 1;
+			for (int iRow = row; iRow <= 9; iRow++) {
+				if (iColumn <= 8) {
+					for (std::tuple<std::string, int, int> square : board) {
+						if (std::get<1>(square) == iRow && std::get<2>(square) == column + iColumn) {
+							if (std::get<0>(square)[0] == WHITE) {
+								moves.push_back({ pieceColorAndType, iRow, column + iColumn });
+								loopBroken = true;
+								break;
+							}
+							else if (std::get<0>(square)[0] == BLACK) {
+								loopBroken = true;
+								break;
+							}
+						}
+					}
+				}
+				else {
+					loopBroken = true;
+					break;
+				}
+				iColumn++;
+				if (loopBroken) {
+					break;
+				}
+			}
+		}
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> upLefDiagnalMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		if (pieceColor == WHITE) {
+			bool loopBroken = false;
+			int iColumn = 1;
+			for (int iRow = row; iRow <= 9; iRow++) {
+				if (iColumn >= 0) {
+					for (std::tuple<std::string, int, int> square : board) {
+						if (std::get<1>(square) == iRow && std::get<2>(square) == column - iColumn) {
+							if (std::get<0>(square)[0] == BLACK) {
+								moves.push_back({ pieceColorAndType, iRow, column - iColumn });
+								loopBroken = true;
+								break;
+							}
+							else if (std::get<0>(square)[0] == WHITE) {
+								loopBroken = true;
+								break;
+							}
+						}
+					}
+				}
+				else {
+					loopBroken = true;
+					break;
+				}
+				iColumn++;
+				if (loopBroken) {
+					break;
+				}
+			}
+		}
+		else if (pieceColor == BLACK) {
+			bool loopBroken = false;
+			int iColumn = 1;
+			for (int iRow = row; iRow <= 9; iRow++) {
+				if (iColumn >= 0) {
+					for (std::tuple<std::string, int, int> square : board) {
+						if (std::get<1>(square) == iRow && std::get<2>(square) == column - iColumn) {
+							if (std::get<0>(square)[0] == WHITE) {
+								moves.push_back({ pieceColorAndType, iRow, column - iColumn });
+								loopBroken = true;
+								break;
+							}
+							else if (std::get<0>(square)[0] == BLACK) {
+								loopBroken = true;
+								break;
+							}
+						}
+					}
+				}
+				else {
+					loopBroken = true;
+					break;
+				}
+				iColumn++;
+				if (loopBroken) {
+					break;
+				}
+			}
+		}
 		return moves;
 	}
 
@@ -432,6 +586,7 @@ public:
 		}
 		return moves;
 	}
+
 
 	bool isOnBaord(int row, int column) {
 		if (row > 9 || row < 1 || column > 9 || column < 1) {
