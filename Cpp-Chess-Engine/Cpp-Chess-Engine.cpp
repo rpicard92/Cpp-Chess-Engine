@@ -9,8 +9,8 @@ int main()
 {
 	Model model = Model();
 	Solver solver = Solver();
-	int test = 2;
-	std::pair<Model, int>  pair = solver.solve(model, test, 'w');
-	cout << "Hello CMake." << endl;
+	int test = 1;
+	std::pair<Model, int> pair = solver.solve(model, test, 'w');
+	cout << "Score: " + std::to_string(pair.second) << endl;
 	return 0;
 }

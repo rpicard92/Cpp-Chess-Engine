@@ -892,7 +892,8 @@ void Model::setLocationTo(std::string piece, int row, int column) {
 }
 
 int Model::getPieceValue(std::string piece) {
-	return pieceValues[piece];
+	int value = pieceValues[piece];
+	return value;
 }
 
 int Model::getScore(char playerColor) {
