@@ -40,12 +40,10 @@ std::pair<Model, int> Solver::dfsAlphaBeta(Model model, int depth, bool maximizi
 		for (Model validMove : validMoves) {
 			std::pair<Model, int> currentEvalution = dfsAlphaBeta(validMove, depth - 1, false, flipTurn(playerColor));
 			if (currentEvalution.second > maximumEvalution.second) {
-				return currentEvalution;
-			}
-			else {
-				return maximumEvalution;
+				maximumEvalution = currentEvalution; // TODO: Start here, note this is std::pair is not copyable if one of the asignment is not copiable.
 			}
 		}
+		return maximumEvalution;
 	}
 	else {
 		std::pair<Model, int>  minimumEvaluation = { model, POSITIVE_INFINITY };
@@ -53,12 +51,10 @@ std::pair<Model, int> Solver::dfsAlphaBeta(Model model, int depth, bool maximizi
 		for (Model validMove : validMoves) {
 			std::pair<Model, int> currentEvalution = dfsAlphaBeta(validMove, depth - 1, true, flipTurn(playerColor));
 			if (currentEvalution.second < minimumEvaluation.second) {
-				return currentEvalution;
-			}
-			else {
-				return minimumEvaluation;
+				minimumEvaluation = currentEvalution; // TODO: Start here, note this is std::pair is not copyable if one of the asignment is not copiable.
 			}
 		}
+		return minimumEvaluation;
 	}
 }
 
