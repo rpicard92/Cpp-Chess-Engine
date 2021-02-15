@@ -87,7 +87,7 @@ public:
 		else if (pieceType == 'q') {
 			return getQueenMoves(piece);
 		}
-		else if (piece == '!') {
+		else if (pieceType == '!') {
 			return getKingMoves(piece);
 		}
 	};
