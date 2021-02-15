@@ -84,6 +84,12 @@ public:
 		else if (pieceType == 'b') {
 			return getBishopMoves(piece);
 		}
+		else if (pieceType == 'q') {
+			return getQueenMoves(piece);
+		}
+		else if (piece == '!') {
+			return getKingMoves(piece);
+		}
 	};
 
 	char getPieceType(std::tuple<std::string, int, int> piece) {
@@ -233,6 +239,110 @@ public:
 		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downRightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downLeftMoves = downLeftDiagnalMoves(piece);
 		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downLeftMoves, moves);
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getQueenMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		std::vector<std::tuple<std::string, int, int>> upMoves = getUpMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> downMoves = getDownMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> leftMoves = getLeftMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(leftMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> rightMoves = getRightMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(rightMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> upRightMoves = upRightDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upRightMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> upLeftMoves = upLeftDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upLeftMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> downRightMoves = downRightDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downRightMoves, moves);
+		std::vector<std::tuple<std::string, int, int>> downLeftMoves = downLeftDiagnalMoves(piece);
+		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downLeftMoves, moves);
+		return moves;
+	}
+
+	std::vector<std::tuple<std::string, int, int>> getKingMoves(std::tuple<std::string, int, int> piece) {
+		std::string pieceColorAndType = std::get<0>(piece);
+		char pieceColor = pieceColorAndType[0];
+		char pieceType = pieceColorAndType[1];
+		int row = std::get<1>(piece);
+		int column = std::get<2>(piece);
+		std::vector<std::tuple<std::string, int, int>> moves;
+		if (pieceColor == WHITE) {
+			// up
+			if ((!hasPiece(row + 1, column) || hasBlackPiece(row + 1, column)) && isOnBaord(row + 1, column)) {
+				moves.push_back({ pieceColorAndType, row + 1, column });
+			}
+			// down
+			if ((!hasPiece(row - 1, column) || hasBlackPiece(row + 1, column)) && isOnBaord(row - 1, column)) {
+				moves.push_back({ pieceColorAndType, row - 1, column });
+			}
+			// right
+			if ((!hasPiece(row, column + 1) || hasBlackPiece(row + 1, column)) && isOnBaord(row, column + 1)) {
+				moves.push_back({ pieceColorAndType, row, column + 1 });
+			}
+			// left
+			if ((!hasPiece(row, column - 1) || hasBlackPiece(row + 1, column)) && isOnBaord(row, column - 1)) {
+				moves.push_back({ pieceColorAndType, row, column - 1 });
+			}
+			// up right
+			if ((!hasPiece(row + 1, column + 1) || hasBlackPiece(row + 1, column + 1)) && isOnBaord(row + 1, column + 1)) {
+				moves.push_back({ pieceColorAndType, row + 1, column + 1});
+			}
+			// up left
+			if ((!hasPiece(row + 1, column - 1) || hasBlackPiece(row + 1, column - 1)) && isOnBaord(row + 1, column - 1)) {
+				moves.push_back({ pieceColorAndType, row + 1, column - 1 });
+			}
+			// down left
+			if ((!hasPiece(row - 1, column - 1) || hasBlackPiece(row - 1, column - 1)) && isOnBaord(row - 1, column - 1)) {
+				moves.push_back({ pieceColorAndType, row - 1, column - 1 });
+			}
+			// down right
+			if ((!hasPiece(row - 1, column + 1) || hasBlackPiece(row - 1, column + 1)) && isOnBaord(row - 1, column + 1)) {
+				moves.push_back({ pieceColorAndType, row - 1, column + 1 });
+			}
+		}
+		else if (pieceColor == BLACK) {
+			// up
+			if ((!hasPiece(row + 1, column) || hasWhitePiece(row + 1, column)) && isOnBaord(row + 1, column)) {
+				moves.push_back({ pieceColorAndType, row + 1, column });
+			}
+			// down
+			if ((!hasPiece(row - 1, column) || hasWhitePiece(row + 1, column)) && isOnBaord(row - 1, column)) {
+				moves.push_back({ pieceColorAndType, row - 1, column });
+			}
+			// right
+			if ((!hasPiece(row, column + 1) || hasWhitePiece(row + 1, column)) && isOnBaord(row, column + 1)) {
+				moves.push_back({ pieceColorAndType, row, column + 1 });
+			}
+			// left
+			if ((!hasPiece(row, column - 1) || hasWhitePiece(row + 1, column)) && isOnBaord(row, column - 1)) {
+				moves.push_back({ pieceColorAndType, row, column - 1 });
+			}
+			// up right
+			if ((!hasPiece(row + 1, column + 1) || hasWhitePiece(row + 1, column + 1)) && isOnBaord(row + 1, column + 1)) {
+				moves.push_back({ pieceColorAndType, row + 1, column + 1 });
+			}
+			// up left
+			if ((!hasPiece(row + 1, column - 1) || hasWhitePiece(row + 1, column - 1)) && isOnBaord(row + 1, column - 1)) {
+				moves.push_back({ pieceColorAndType, row + 1, column - 1 });
+			}
+			// down left
+			if ((!hasPiece(row - 1, column - 1) || hasWhitePiece(row - 1, column - 1)) && isOnBaord(row - 1, column - 1)) {
+				moves.push_back({ pieceColorAndType, row - 1, column - 1 });
+			}
+			// down right
+			if ((!hasPiece(row - 1, column + 1) || hasWhitePiece(row - 1, column + 1)) && isOnBaord(row - 1, column + 1)) {
+				moves.push_back({ pieceColorAndType, row - 1, column + 1 });
+			}
+		}
 		return moves;
 	}
 
