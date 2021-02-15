@@ -1,7 +1,7 @@
 
-#include <string>;
-#include <vector>;
-#include <map>;
+#include <string>
+#include <vector>
+#include <map>
 
 class Model {
 
@@ -910,7 +910,6 @@ public:
 	}
 
 
-private:
 	const char BLACK = 'b';
 	const char WHITE = 'w';
 	const std::string EMPT = "empty";

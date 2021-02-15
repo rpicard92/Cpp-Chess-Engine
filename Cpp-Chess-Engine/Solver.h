@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>;
+#include <vector>
 #include "Model.h"
 
 class Solver {
@@ -10,13 +10,11 @@ class Solver {
 		Solver();
 		~Solver();
 
-		virtual Model solve(Model, int);
+		virtual Model solve(Model, int, char);
 
-	private:
+		virtual Model dfsAlphaBeta(Model, int, bool, char);
 
-		virtual Model dfsAlphaBeta(Model, int, int);
-
-		virtual int evaluate(Model model);
+		virtual int evaluate(Model model, char);
 
 
 };

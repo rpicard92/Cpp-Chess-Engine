@@ -1,5 +1,6 @@
-#include <vector>;
+#include <vector>
 #include "Model.h"
+
 
 class Solver {
 
@@ -17,14 +18,6 @@ class Solver {
 			return dfsAlphaBeta(model, depth, true, playerColor);
 		}
 
-	private:
-
-		const int NEGATIVE_INFINITY = -1000000;
-		const int POSITIVE_INFINITY = 1000000;
-
-		// TODO: figure out how to pull these from Model.h
-		const char BLACK = 'b';
-		const char WHITE = 'w';
 
 		char flipTurn(char playerColor) {
 			if (playerColor == WHITE) {
@@ -63,6 +56,11 @@ class Solver {
 			}
 		}
 
+		const int NEGATIVE_INFINITY = -1000000;
+		const int POSITIVE_INFINITY = 1000000;
 
+		// TODO: figure out how to pull these from Model.h
+		const char BLACK = 'b';
+		const char WHITE = 'w';
 
 };
