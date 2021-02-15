@@ -20,14 +20,11 @@ public:
 		};
 
 		pieceValues = {
-			{"br",5},{"bk",3},{"bb",3},{"bq",9},{"bk",0},{"bb",3},{"bk",3},{"br",5},
-			{"bp",1},{"bp",1},{"bb",1},{"bp",1},{"bp",1},{"bm",1},{"bp",1},{"bp",1},
-			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
-			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
-			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
-			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
-			{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},
-			{"wr",5},{"wk",3},{"wb",3},{"wq",9},{"w!",0},{"wb",3},{"wk",3},{"wr",5}
+			{"br",5},{"bk",3},{"bb",3},{"bq",9},{"b!",0},
+			{"bp",1},
+			{EMPT,0},
+			{"wp",1},
+			{"wr",5},{"wk",3},{"wb",3},{"wq",9},{"w!",0}
 		};
 	}
 
@@ -898,6 +895,18 @@ public:
 
 	int getPieceValue(std::string piece) {
 		return pieceValues[piece];
+	}
+
+	int getScore(char playerColor) {
+		int score = 0;
+		if (playerColor == WHITE) {
+			for (std::tuple<std::string, int, int> square : board) {
+				std::string pieceType = std::get<0>(square);
+				if (pieceType[0] == WHITE) {
+					score = score + getPieceValue(pieceType);
+				}
+			}
+		}
 	}
 
 private:

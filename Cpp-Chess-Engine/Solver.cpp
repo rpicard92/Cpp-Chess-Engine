@@ -30,15 +30,15 @@ class Solver {
 			}
 			else if (maximizingPlayer == true) {
 				int maximumEvalution = NEGATIVE_INFINITY;
-				std::vector<Model> validMoves = model.get;
-				for (Model validMove : findValidMoves) {
+				std::vector<Model> validMoves = model.getValidMoves();
+				for (Model validMove : validMoves) {
 					std::pair<Model, int> currentEvalution = dfsAlphaBeta(validMove, depth - 1, false);
 					maximumEvalution = std::max(maximumEvalution, currentEvalution.second);
 				}
 			}
 			else {
 				int minimumEvaluation = POSITIVE_INFINITY;
-				std::vector<Model> validMoves = findValidMoves(Model);
+				std::vector<Model> validMoves = model.getValidMoves();
 				for (Model validMove : validMoves) {
 					std::pair<Model, int> currentEvalution = dfsAlphaBeta(validMove, depth - 1, true);
 					minimumEvaluation = std::min(minimumEvaluation, currentEvalution.second);
@@ -46,12 +46,6 @@ class Solver {
 			}
 		}
 
-		std::pair<Model, int> evaluate(Model model) {
 
-		}
-
-		std::vector<Model> findValideMoves(Model model) {
-
-		}
 
 };
