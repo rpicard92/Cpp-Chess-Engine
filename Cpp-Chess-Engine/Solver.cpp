@@ -30,7 +30,7 @@ class Solver {
 			}
 			else if (maximizingPlayer == true) {
 				int maximumEvalution = NEGATIVE_INFINITY;
-				std::vector<Model> validMoves = findValidMoves(Model);
+				std::vector<Model> validMoves = model.get;
 				for (Model validMove : findValidMoves) {
 					std::pair<Model, int> currentEvalution = dfsAlphaBeta(validMove, depth - 1, false);
 					maximumEvalution = std::max(maximumEvalution, currentEvalution.second);
