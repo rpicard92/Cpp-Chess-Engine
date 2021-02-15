@@ -72,4 +72,5 @@ class Model {
 		virtual int getPieceValue(std::string);
 
 		virtual int getScore(char);
+
 };

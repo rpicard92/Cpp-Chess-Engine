@@ -211,13 +211,13 @@ public:
 		int column = std::get<2>(piece);
 		std::vector<std::tuple<std::string, int, int>> moves;
 		std::vector<std::tuple<std::string, int, int>> upMoves = getUpMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upMoves, moves);
+		moves = combineVectors(upMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downMoves = getDownMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downMoves, moves);
+		moves = combineVectors(downMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> leftMoves = getLeftMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(leftMoves, moves);
+		moves = combineVectors(leftMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> rightMoves = getRightMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(rightMoves, moves);
+		moves = combineVectors(rightMoves, moves);
 		return moves;
 	}
 
@@ -229,13 +229,13 @@ public:
 		int column = std::get<2>(piece);
 		std::vector<std::tuple<std::string, int, int>> moves;
 		std::vector<std::tuple<std::string, int, int>> upRightMoves = upRightDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upRightMoves, moves);
+		moves = combineVectors(upRightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> upLeftMoves = upLeftDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upLeftMoves, moves);
+		moves = combineVectors(upLeftMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downRightMoves = downRightDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downRightMoves, moves);
+		moves = combineVectors(downRightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downLeftMoves = downLeftDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downLeftMoves, moves);
+		moves = combineVectors(downLeftMoves, moves);
 		return moves;
 	}
 
@@ -247,21 +247,21 @@ public:
 		int column = std::get<2>(piece);
 		std::vector<std::tuple<std::string, int, int>> moves;
 		std::vector<std::tuple<std::string, int, int>> upMoves = getUpMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upMoves, moves);
+		moves = combineVectors(upMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downMoves = getDownMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downMoves, moves);
+		moves = combineVectors(downMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> leftMoves = getLeftMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(leftMoves, moves);
+		moves = combineVectors(leftMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> rightMoves = getRightMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(rightMoves, moves);
+		moves = combineVectors(rightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> upRightMoves = upRightDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upRightMoves, moves);
+		moves = combineVectors(upRightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> upLeftMoves = upLeftDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(upLeftMoves, moves);
+		moves = combineVectors(upLeftMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downRightMoves = downRightDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downRightMoves, moves);
+		moves = combineVectors(downRightMoves, moves);
 		std::vector<std::tuple<std::string, int, int>> downLeftMoves = downLeftDiagnalMoves(piece);
-		std::vector<std::tuple<std::string, int, int>> moves = combineVectors(downLeftMoves, moves);
+		moves = combineVectors(downLeftMoves, moves);
 		return moves;
 	}
 
@@ -617,9 +617,9 @@ public:
 
 	//TODO: move into helper class
 	template<typename T>
-		std::vector<typename T> combineVectors(std::vector<typename T> vector1, std::vector<typename T> vector2) {
-		for (std::vector<typename T> elEMPTent : vector1) {
-			vector2.push_back(elEMPTent);
+		std::vector<T> combineVectors(std::vector<T> vector1, std::vector<T> vector2) {
+		for (T element : vector1) {
+			vector2.push_back(element);
 		}
 		return vector2;
 	}
@@ -849,7 +849,7 @@ public:
 				return true;
 			}
 		}
-		return false
+		return false;
 	}
 
 	bool hasBlackPiece(int row, int column) {
@@ -908,6 +908,7 @@ public:
 			}
 		}
 	}
+
 
 private:
 	const char BLACK = 'b';

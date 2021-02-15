@@ -18,6 +18,5 @@ class Solver {
 
 		virtual int evaluate(Model model);
 
-		vitural std::vector<Model> findValideMoves(Model model);
 
 };
