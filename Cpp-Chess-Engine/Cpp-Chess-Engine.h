@@ -5,5 +5,7 @@
 
 #include <iostream>
 #include "model.h"
+#include "Solver.h"
+#include "Model.h"
 
 // TODO: Reference additional headers your program requires here.

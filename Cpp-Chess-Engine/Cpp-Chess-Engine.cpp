@@ -2,8 +2,6 @@
 //
 
 #include "Cpp-Chess-Engine.h"
-#include "Solver.h"
-#include "Model.h"
 
 using namespace std;
 
@@ -11,7 +9,8 @@ int main()
 {
 	Model model = Model();
 	Solver solver = Solver();
-	model = solver.solve(model, 1, 'w');
+	int test = 2;
+	std::pair<Model, int>  pair = solver.solve(model, test, 'w');
 	cout << "Hello CMake." << endl;
 	return 0;
 }
