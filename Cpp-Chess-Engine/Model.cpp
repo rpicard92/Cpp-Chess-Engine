@@ -9,25 +9,25 @@ public:
 
 	Model() {
 		board = {
-			{"br1",8,1},{"bk1",8,2},{"bb1",8,3},{"bq1",8,4},{"b!!",8,5},{"bb2",8,6},{"bk2",8,7},{"br2",8,8},
-			{"bp1",7,1},{"bp2",7,2},{"bp3",7,3},{"bp4",7,4},{"bp5",7,5},{"bm6",7,6},{"bp7",7,7},{"bp8",7,8},
-			{"emp",6,1},{"emp",6,2},{"emp",6,3},{"emp",6,4},{"emp",6,5},{"emp",6,6},{"emp",6,7},{"emp",6,8},
-			{"emp",5,1},{"emp",5,2},{"emp",5,3},{"emp",5,4},{"emp",5,5},{"emp",5,6},{"emp",5,7},{"emp",5,8},
-			{"emp",4,1},{"emp",4,2},{"emp",4,3},{"emp",4,4},{"emp",4,5},{"emp",4,6},{"emp",4,7},{"emp",4,8},
-			{"emp",3,1},{"emp",3,2},{"emp",3,3},{"emp",3,4},{"emp",3,5},{"emp",3,6},{"emp",3,7},{"emp",3,8},
-			{"wp1",2,1},{"wp2",2,2},{"wp3",2,3},{"wp4",2,4},{"wp5",2,5},{"em6",2,6},{"wp7",2,7},{"wp8",2,8},
-			{"wr1",1,1},{"wk1",1,2},{"wb1",1,3},{"wq1",1,4},{"wk!",1,5},{"wb2",1,6},{"wk2",1,7},{"wr2",1,8}
+			{"br",8,1},{"bk",8,2},{"bb",8,3},{"bq",8,4},{"b!",8,5},{"bb",8,6},{"bk",8,7},{"br",8,8},
+			{"bp",7,1},{"bp",7,2},{"bp",7,3},{"bp",7,4},{"bp",7,5},{"bm",7,6},{"bp",7,7},{"bp",7,8},
+			{EMPT,6,1},{EMPT,6,2},{EMPT,6,3},{EMPT,6,4},{EMPT,6,5},{EMPT,6,6},{EMPT,6,7},{EMPT,6,8},
+			{EMPT,5,1},{EMPT,5,2},{EMPT,5,3},{EMPT,5,4},{EMPT,5,5},{EMPT,5,6},{EMPT,5,7},{EMPT,5,8},
+			{EMPT,4,1},{EMPT,4,2},{EMPT,4,3},{EMPT,4,4},{EMPT,4,5},{EMPT,4,6},{EMPT,4,7},{EMPT,4,8},
+			{EMPT,3,1},{EMPT,3,2},{EMPT,3,3},{EMPT,3,4},{EMPT,3,5},{EMPT,3,6},{EMPT,3,7},{EMPT,3,8},
+			{"wp",2,1},{"wp",2,2},{"wp",2,3},{"wp",2,4},{"wp",2,5},{"EMPT",2,6},{"wp",2,7},{"wp",2,8},
+			{"wr",1,1},{"wk",1,2},{"wb",1,3},{"wq",1,4},{"w!",1,5},{"wb",1,6},{"wk",1,7},{"wr",1,8}
 		};
 
 		pieceValues = {
-			{"br1",5},{"bk1",3},{"bb1",3},{"bq1",9},{"bk!",0},{"bb2",3},{"bk2",3},{"br2",5},
-			{"bp1",1},{"bp2",1},{"bp3",1},{"bp4",1},{"bp5",1},{"bm6",1},{"bp7",1},{"bp8",1},
-			{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},
-			{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},
-			{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},
-			{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},{"emp",0},
-			{"wp1",1},{"wp2",1},{"wp3",1},{"wp4",1},{"wp5",1},{"em6",1},{"wp7",1},{"wp8",1},
-			{"wr1",5},{"wk1",3},{"wb1",3},{"wq1",9},{"w!!",0},{"wb2",3},{"wk2",3},{"wr2",5}
+			{"br",5},{"bk",3},{"bb",3},{"bq",9},{"bk",0},{"bb",3},{"bk",3},{"br",5},
+			{"bp",1},{"bp",1},{"bb",1},{"bp",1},{"bp",1},{"bm",1},{"bp",1},{"bp",1},
+			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
+			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
+			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
+			{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},{EMPT,0},
+			{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},{"wp",1},
+			{"wr",5},{"wk",3},{"wb",3},{"wq",9},{"w!",0},{"wb",3},{"wk",3},{"wr",5}
 		};
 	}
 
@@ -39,9 +39,9 @@ public:
 		std::vector<Model> models;
 		for (std::tuple<std::string, int, int> piece : board) {
 			if (isPiece(piece)) {
-				std::vector<std::tuple<std::string, int, int>> moves = getPieceMoves(piece);
+				std::vector<std::tuple<std::string, int, int>> moves = getPiecEMPToves(piece);
 				// TODO: finish hear!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				std::vector<Model> generatedModels = generateModels(moves);
+				std::vector<Model> generatedModels = generatEMPTodels(moves);
 				for (Model generatedModel : generatedModels) {
 					models.push_back(generatedModel);
 				}
@@ -52,7 +52,7 @@ public:
 
 
 	bool isPiece(std::tuple<std::string, int, int> piece) {
-		if (std::get<0>(piece) != "emp") {
+		if (std::get<0>(piece) != EMPT) {
 			return true;
 		}
 		else {
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	std::vector<Model> generateModels(std::vector<std::tuple<std::string, int, int>> moves) {
+	std::vector<Model> generatEMPTodels(std::vector<std::tuple<std::string, int, int>> moves) {
 		std::vector<Model> models;
 		for (std::tuple<std::string, int, int> move : moves) {
 			Model model = Model();
@@ -70,7 +70,7 @@ public:
 		return models;
 	}
 
-	std::vector<std::tuple<std::string, int, int>> getPieceMoves(std::tuple<std::string, int, int> piece) {
+	std::vector<std::tuple<std::string, int, int>> getPiecEMPToves(std::tuple<std::string, int, int> piece) {
 		char pieceType = getPieceType(piece);
 		if (pieceType == 'p') {
 			return getPawnMoves(piece);
@@ -97,7 +97,7 @@ public:
 		return pieceType[1];
 	}
 
-	// TODO: Account for Empassant, which required a temporal aspect
+	// TODO: Account for EMPTpassant, which required a tEMPTporal aspect
 	std::vector<std::tuple<std::string, int, int>> getPawnMoves(std::tuple<std::string, int, int> piece) {
 		std::string pieceColorAndType = std::get<0>(piece);
 		char pieceColor = pieceColorAndType[0];
@@ -619,10 +619,10 @@ public:
 	}
 
 	//TODO: move into helper class
-	template<typename T>
+	tEMPTplate<typename T>
 	std::vector<typename T> combineVectors(std::vector<typename T> vector1, std::vector<typename T> vector2) {
-		for (std::vector<typename T> element : vector1) {
-			vector2.push_back(element);
+		for (std::vector<typename T> elEMPTent : vector1) {
+			vector2.push_back(elEMPTent);
 		}
 		return vector2;
 	}
@@ -848,7 +848,7 @@ public:
 
 	bool hasPiece(int row, int column) {
 		for (std::tuple<std::string, int, int> square : board) {
-			if (std::get<0>(square) != "emp" && std::get<1>(square) == row && std::get<2>(square) == column) {
+			if (std::get<0>(square) != EMPT && std::get<1>(square) == row && std::get<2>(square) == column) {
 				return true;
 			}
 		}
@@ -875,7 +875,7 @@ public:
 
 	void movePieceToLocation(std::string piece, int row, int column) {
 		std::pair<int, int> currentLocation = getLocationOfPiece(piece);
-		setLocationTo("emp", currentLocation.first, currentLocation.second); // remove piece
+		setLocationTo(EMPT, currentLocation.first, currentLocation.second); // rEMPTove piece
 		setLocationTo(piece, row, column); // set piece
 	}
 
@@ -912,6 +912,7 @@ public:
 private:
 	const char BLACK = 'b';
 	const char WHITE = 'w';
+	const std::string EMPT = "EMPTty";
 	std::vector<std::tuple<std::string, int, int>> board;
 	std::map<std::string, int> pieceValues;
 };
