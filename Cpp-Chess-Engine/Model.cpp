@@ -39,7 +39,7 @@ public:
 		std::vector<Model> models;
 		for (std::tuple<std::string, int, int> piece : board) {
 			if (isPiece(piece)) {
-				std::vector<std::tuple<std::string, int, int>> moves = getPiecEMPToves(piece);
+				std::vector<std::tuple<std::string, int, int>> moves = getPieceMoves(piece);
 				// TODO: finish hear!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				std::vector<Model> generatedModels = generatEMPTodels(moves);
 				for (Model generatedModel : generatedModels) {
@@ -70,7 +70,7 @@ public:
 		return models;
 	}
 
-	std::vector<std::tuple<std::string, int, int>> getPiecEMPToves(std::tuple<std::string, int, int> piece) {
+	std::vector<std::tuple<std::string, int, int>> getPieceMoves(std::tuple<std::string, int, int> piece) {
 		char pieceType = getPieceType(piece);
 		if (pieceType == 'p') {
 			return getPawnMoves(piece);
@@ -898,15 +898,6 @@ public:
 
 	int getPieceValue(std::string piece) {
 		return pieceValues[piece];
-	}
-
-	//TODO: Might not need
-	std::string getPieceAtLocation(int row, int column) {
-		for (std::tuple<std::string, int, int> square : board) {
-			if (std::get<1>(square) == row && std::get<2>(square) == column) {
-				return std::get<0>(square);
-			}
-		}
 	}
 
 private:

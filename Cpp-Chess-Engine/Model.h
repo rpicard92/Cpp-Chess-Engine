@@ -18,7 +18,7 @@ class Model {
 
 		virtual std::vector<Model> generatEMPTodels(std::vector<std::tuple<std::string, int, int>>);
 
-		virtual std::vector<std::tuple<std::string, int, int>> getPiecEMPToves(std::tuple<std::string, int, int>);
+		virtual std::vector<std::tuple<std::string, int, int>> getPieceMoves(std::tuple<std::string, int, int>);
 
 		virtual char getPieceType(std::tuple<std::string, int, int>);
 
@@ -70,9 +70,5 @@ class Model {
 		virtual void setLocationTo(std::string, int, int);
 
 		virtual int getPieceValue(std::string);
-
-		//TODO: Might not need
-		virtual std::string getPieceAtLocation(int, int);
-		}
 
 };
