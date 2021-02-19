@@ -26,6 +26,8 @@ Model::Model() {
 	};
 }
 
+
+
 Model::~Model() {
 
 }
@@ -916,10 +918,3 @@ int Model::getScore(char playerColor) {
 	}
 	return score;
 }
-
-
-const char BLACK = 'b';
-const char WHITE = 'w';
-const std::string EMPT = "empty";
-std::vector<std::tuple<std::string, int, int>> board;
-std::map<std::string, int> pieceValues;

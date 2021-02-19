@@ -10,11 +10,23 @@ class Solver {
 		Solver();
 		~Solver();
 
-		virtual std::pair<Model, int>  solve(Model, int, char);
+		struct ModelScorePair {
+			ModelScorePair() {
 
-		virtual std::pair<Model, int> dfsAlphaBeta(Model, int, bool, char);
+			}
 
-		virtual std::pair<Model, int> evaluate(Model model, char);
+			~ModelScorePair() {
+
+			};
+			Model model;
+			int score;
+		};
+
+		virtual ModelScorePair solve(Model, int, char);
+
+		virtual ModelScorePair dfsAlphaBeta(Model, int, bool, char);
+
+		virtual ModelScorePair evaluate(Model , char);
 
 		virtual char flipTurn(char);
 

@@ -73,9 +73,9 @@ class Model {
 		virtual int getScore(char);
 
 
-		const char BLACK = 'b';
-		const char WHITE = 'w';
-		const std::string EMPT = "empty";
+		char BLACK = 'b';
+		char WHITE = 'w';
+		std::string EMPT = "empty";
 		std::vector<std::tuple<std::string, int, int>> board;
 		std::map<std::string, int> pieceValues;
 };
