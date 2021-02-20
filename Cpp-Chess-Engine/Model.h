@@ -11,6 +11,8 @@ class Model {
 		Model();
 		~Model();
 
+		virtual void printBoard();
+
 		virtual std::vector<Model> getValidMoves();
 
 		virtual bool isPiece(std::tuple<std::string, int, int>);
@@ -75,7 +77,7 @@ class Model {
 
 		char BLACK = 'b';
 		char WHITE = 'w';
-		std::string EMPT = "empty";
+		std::string EMPT = "em";
 		std::vector<std::tuple<std::string, int, int>> board;
 		std::map<std::string, int> pieceValues;
 };

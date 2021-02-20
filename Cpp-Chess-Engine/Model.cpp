@@ -3,12 +3,12 @@
 #include <vector>
 #include <map>
 #include "Model.h"
-
+#include <iostream>
 
 Model::Model() {
 	board = {
 		{"br",8,1},{"bk",8,2},{"bb",8,3},{"bq",8,4},{"b!",8,5},{"bb",8,6},{"bk",8,7},{"br",8,8},
-		{"bp",7,1},{"bp",7,2},{"bp",7,3},{"bp",7,4},{"bp",7,5},{"bm",7,6},{"bp",7,7},{"bp",7,8},
+		{"bp",7,1},{"bp",7,2},{"bp",7,3},{"bp",7,4},{"bp",7,5},{"bp",7,6},{"bp",7,7},{"bp",7,8},
 		{EMPT,6,1},{EMPT,6,2},{EMPT,6,3},{EMPT,6,4},{EMPT,6,5},{EMPT,6,6},{EMPT,6,7},{EMPT,6,8},
 		{EMPT,5,1},{EMPT,5,2},{EMPT,5,3},{EMPT,5,4},{EMPT,5,5},{EMPT,5,6},{EMPT,5,7},{EMPT,5,8},
 		{EMPT,4,1},{EMPT,4,2},{EMPT,4,3},{EMPT,4,4},{EMPT,4,5},{EMPT,4,6},{EMPT,4,7},{EMPT,4,8},
@@ -30,6 +30,23 @@ Model::Model() {
 
 Model::~Model() {
 
+}
+
+void Model::printBoard()
+{
+	int count = 0;
+	std::string line;
+	for (std::tuple<std::string, int, int> square : board) {
+		if (count >= 8) {
+			count = 0;
+			std::cout << line << std::endl;
+			line = "";
+		}
+		std::string squareString = " {" + std::get<0>(square) + ", " + std::to_string(std::get<1>(square)) + ", " + std::to_string(std::get<2>(square)) + "} ";
+		line = line + squareString;
+		count++;
+	}
+	std::cout << line << std::endl;
 }
 
 std::vector<Model> Model::getValidMoves() {
